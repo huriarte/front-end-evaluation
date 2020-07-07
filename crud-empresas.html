@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>EMPRESAS</title>
+</head>
+<body>
+
+<!-- PARAMETROS --> 
+
+<form action="javascript:void(0);" method="POST" onsubmit="app.agregar()"> 
+  <input type="text" id="idEmpresa" placeholder="id">
+  <input type="text" id="nameEmpresa" placeholder="name">
+  <input type="text" id="nitEmpresa" placeholder="nit">
+  <input type="date" id="creationDateEmpresa" placeholder="creationDate">
+  <input type="text" id="directionEmpresa" placeholder="direction">
+  <input type="submit" value="Agregar">
+</form>
+<!-- LISTA DE EMPRESAS --> 
+
+<table>
+  <tr>
+    <th>LISTA EMPRESAS</th>
+  </tr>
+    <tbody id="empresas">
+    </tbody>
+</table>
+
+<script>
+var app = new function() {
+
+  this.elemento = document.getElementById('empresas');
+
+  this.empresas = [];
+  
+  this.mostrar = function() {
+    var data = '';
+
+    if (this.empresas.length > 0) {
+      for (i = 0; i < this.empresas.length; i++) {
+        data += '<tr>';
+        data += '<td>' + this.empresas[i].id + ' | ' + this.empresas[i].name +' | ' + this.empresas[i].nit +' | ' + this.empresas[i].creationDate +' | ' + this.empresas[i].direction +'</td>';
+        data += '<td><button onclick="app.eliminar(' + i + ')">Eliminar</button></td>';
+        data += '</tr>';
+      }
+    }
+
+    return this.elemento.innerHTML = data;
+  };
+
+  this.agregar = function () {
+    idEmpresa = document.getElementById('idEmpresa');
+    nameEmpresa = document.getElementById('nameEmpresa');
+    nitEmpresa = document.getElementById('nitEmpresa');
+    creationDateEmpresa = document.getElementById('creationDateEmpresa');
+    directionEmpresa = document.getElementById('directionEmpresa');
+    
+    var localEmpresa = {
+    	"id" : idEmpresa.value,
+    	"name" : nameEmpresa.value,
+    	"nit" : nitEmpresa.value,
+    	"creationDate" : creationDateEmpresa.value,
+    	"direction" : directionEmpresa.value
+    }
+
+    if (localEmpresa) {
+      this.empresas.push(localEmpresa);      
+    
+      idEmpresa.value = "";
+      nameEmpresa.value = "";
+      nitEmpresa.value = "";
+      creationDateEmpresa.value = "";
+      directionEmpresa.value = "";
+      
+      
+      this.mostrar();
+    }
+  };
+
+  this.eliminar = function (item) {    
+    this.empresas.splice(item, 1);    
+    this.mostrar();
+  };
+  
+}
+
+app.mostrar();
+
+</script>
+</body>
+</html>
