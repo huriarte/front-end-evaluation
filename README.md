@@ -9,3 +9,7 @@ Para "primos.js"
 Para "palindromos.js"
 
 - Dentro del método principal (al final del archivo), se indica la palabra a evaluar
+
+Para "crud-empresas.html"
+
+- Abrir dentro de un navegador, solo tiene operaciones crear, listar y eliminar
